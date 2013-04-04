@@ -124,6 +124,10 @@ SOURCE=.\Snake.c
 # PROP Default_Filter "h;hpp;hxx;hm;inl"
 # Begin Source File
 
+SOURCE=.\cu_map.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\DealBeginMenuMsg.h
 # End Source File
 # Begin Source File
@@ -145,6 +149,10 @@ SOURCE=.\Init_Playing_Map.h
 # Begin Source File
 
 SOURCE=.\MacroDefine.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\map_data.h
 # End Source File
 # Begin Source File
 
