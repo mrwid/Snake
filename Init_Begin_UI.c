@@ -31,15 +31,13 @@ void InitBeginUI( HDC hdc, HINSTANCE hInst )
 
 #define UNICODE
 
-typedef struct GameMenu
+struct GameMenu
 {
 	int id;
 	TCHAR szName[10];
 	int xPos;
 	int yPos;
-}GMenu;
-
-GMenu menu[] = {
+}menu[] = {
 	{ 1, TEXT("开始游戏"), 345, 250 },
 	{ 2, TEXT("查看帮助"), 345, 300 },
 	{ 3, TEXT("作者博客"), 345, 350 },

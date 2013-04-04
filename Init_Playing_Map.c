@@ -1,5 +1,5 @@
 #include "Init_Playing_Map.h"
-
+#include <stdio.h>
 //////////////////////////////////////////////////////////////////////////
 
 void InitPlayingMap( HWND hwnd, HDC hdc, HINSTANCE hInst )
@@ -9,21 +9,12 @@ void InitPlayingMap( HWND hwnd, HDC hdc, HINSTANCE hInst )
 
 //////////////////////////////////////////////////////////////////////////
 
-//画砖块
+//画四周砖块
 void DrawBrickWall( HWND hwnd, HDC hdc )
 {
 	int x = 0, y = 0;
 
 	RECT rect = {0};
-
-	HPEN hPen;
-	HBRUSH hBrush;
-
-	hPen = CreatePen( PS_SOLID, 3, RGB(128, 128, 128) );
-	hBrush = CreateSolidBrush( RGB(192, 192, 192) );
-
-	SelectObject( hdc, hPen );
-	SelectObject( hdc, hBrush );
 
 	GetClientRect( hwnd, &rect );
 
@@ -38,51 +29,67 @@ void DrawBrickWall( HWND hwnd, HDC hdc )
 		RoundRect( hdc, 0, y*10, 10, y*10+10, 3, 3 );
 		RoundRect( hdc, rect.right-10, y*10, rect.right, y*10+10, 3, 3 );
 	}
-
-	DeleteObject( hPen );
-	DeleteObject( hBrush );
 }
 
-//初始化随机墙壁坐标
-void InitRandWallPos( HWND hwnd, POINT *pt )
-{
-	RECT rect = {0};
-	GetClientRect( hwnd, &rect );
-	
-	srand( (unsigned)time( NULL ) );
-	
-	pt[0].x = rand() % (rect.right - 60);
-	pt[0].y = rand() % (rect.bottom - 60);
+//////////////////////////////////////////////////////////////////////////
 
-	pt[1].x = rand() % (rect.right - 60);
-	pt[1].y = rand() % (rect.bottom - 60);
-}
+//画线
+void drawWallLine( HDC, int, int, int, int );
 
 //画随机墙
-void DrawRandWall( HWND hwnd, HDC hdc, POINT *pt )
+void DrawRandWall( HWND hwnd, HDC hdc, CMAP *gm_map, int lev )
 {
-	int i = 0, xPos = 0, yPos = 0, length = 0;
+	int i = 0;
+	RECT rect = {0};
+	CLINE line = {0};
 
-	HPEN hPen;
-	HBRUSH hBrush;
+	GetClientRect( hwnd, &rect );
 
-	hPen = CreatePen( PS_SOLID, 3, RGB(128, 128, 128) );
-	hBrush = CreateSolidBrush( RGB(192, 192, 192) );
-
-	SelectObject( hdc, hPen );
-	SelectObject( hdc, hBrush );
-	
-	//绘制随机墙壁
-	/*
-	xPos = pt[0].x;		yPos = pt[0].y;
-	length = (int)sqrt( (pt[1].x - pt[0].x)*(pt[1].x - pt[0].x) + (pt[1].y - pt[0].y)*(pt[1].y - pt[0].y) );
-	for( i; i < abs(length); i+=10 )
+	for( i; i < 5; i++ )
 	{
-		RoundRect( hdc, xPos, yPos, xPos+10, yPos+10, 3, 3 );
-		xPos += 10;		yPos += 10;
-	}
-	*/
+		line.x1 = gm_map[lev].line[i].x1 * rect.right;
+		line.y1 = gm_map[lev].line[i].y1 * rect.bottom;
+		line.x2 = gm_map[lev].line[i].x2 * rect.right;
+		line.y2 = gm_map[lev].line[i].y2 * rect.bottom;
 
-	DeleteObject( hPen );
-	DeleteObject( hBrush );
+		drawWallLine(
+			hdc,
+			(int)(line.x1) + 10 - (int)line.x1 % 10,		//将坐标转换为整十数
+			(int)(line.y1) + 10 - (int)line.y1 % 10,
+			(int)(line.x2) + 10 - (int)line.x2 % 10,
+			(int)(line.y2) + 10 - (int)line.y2 % 10
+		);
+	}
+}
+
+void drawWallLine( HDC hdc, int x1, int y1, int x2, int y2 )
+{
+	int i = 0;
+	int xPos = 0, yPos = 0;
+
+	FILE *fp;
+	fp = fopen( "D:\\a.txt", "a" );
+	fprintf( fp, "%d %d %d %d\n", x1, y1, x2, y2 );
+	fclose( fp );
+
+	if( x2-x1 == 0 )
+	{
+		yPos = y1;
+		for( i = 0; i < (y2-y1)/10; i++ )
+		{
+			RoundRect( hdc, x1, yPos, x1+10, yPos+10, 3, 3 );
+			yPos += 10;
+		}
+	}
+
+	if( y2-y1 == 0 )
+	{
+		xPos = x1;
+		for( i = 0; i < (x2-x1)/10; i++ )
+		{
+			RoundRect( hdc, xPos, y1, xPos+10, y1+10, 3, 3 );
+			xPos += 10;
+		}
+	}
+
 }

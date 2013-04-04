@@ -6,6 +6,7 @@
 
 #include "Init_Playing_Map.h"
 #include "MacroDefine.h"
+#include "cu_map.h"
 #include "resource.h"
 
 //////////////////////////////////////////////////////////////////////////

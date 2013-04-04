@@ -6,6 +6,8 @@
 #include <math.h>
 #include <windows.h>
 
+#include "cu_map.h"
+
 #include "MacroDefine.h"
 
 //////////////////////////////////////////////////////////////////////////
@@ -14,9 +16,6 @@ void InitPlayingMap( HWND, HDC, HINSTANCE );
 
 //////////////////////////////////////////////////////////////////////////
 
-void DrawBrickWall( HWND, HDC );			//»­×©¿é
+void DrawBrickWall( HWND, HDC );			//»­ËÄÖÜ×©¿é
 
-void InitRandWallPos( HWND, POINT* );				//³õÊ¼»¯Ëæ»úÇ½±Ú×ø±ê
-
-void DrawRandWall( HWND, HDC, POINT* );		//Ëæ»úÇ½±Ú
-
+void DrawRandWall( HWND, HDC, CMAP*, int );		//Ëæ»úÇ½±Ú
