@@ -1,0 +1,22 @@
+#pragma once
+
+//////////////////////////////////////////////////////////////////////////
+#include <stdlib.h>
+#include <time.h>
+#include <math.h>
+#include <windows.h>
+
+#include "MacroDefine.h"
+
+//////////////////////////////////////////////////////////////////////////
+
+void InitPlayingMap( HWND, HDC, HINSTANCE );
+
+//////////////////////////////////////////////////////////////////////////
+
+void DrawBrickWall( HWND, HDC );			//»­×©¿é
+
+void InitRandWallPos( HWND, POINT* );				//³õÊ¼»¯Ëæ»úÇ½±Ú×ø±ê
+
+void DrawRandWall( HWND, HDC, POINT* );		//Ëæ»úÇ½±Ú
+
