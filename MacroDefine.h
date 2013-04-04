@@ -15,3 +15,4 @@
 #define			TMR_BEGIN				10000				//开始界面定时器
 #define			TMR_PLAYING_READY		10001				//播放准备音效
 #define			TMR_PLAYING_GO			10002				//播放开始音效
+#define			TMR_IMPACE_TEST			10003				//碰撞检测正确性测试
