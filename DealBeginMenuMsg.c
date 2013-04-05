@@ -167,4 +167,3 @@ void DealMenuClick( int menuID, HWND hwnd, HINSTANCE hInst )
 		return;
 	}
 }
-
