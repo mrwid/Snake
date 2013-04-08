@@ -7,6 +7,7 @@
 #include "Init_Begin_UI.h"
 #include "HelpDialogProc.h"
 #include "MacroDefine.h"
+#include "PlayingProc.h"
 #include "resource.h"
 
 //////////////////////////////////////////////////////////////////////////

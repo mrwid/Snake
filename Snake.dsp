@@ -43,7 +43,7 @@ RSC=rc.exe
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /YX /FD /c
-# ADD CPP /nologo /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /YX /FD /c
+# ADD CPP /nologo /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /FR /YX /FD /c
 # ADD BASE MTL /nologo /D "NDEBUG" /mktyplib203 /win32
 # ADD MTL /nologo /D "NDEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0x804 /d "NDEBUG"
@@ -96,6 +96,10 @@ SOURCE=.\DealBeginMenuMsg.c
 # End Source File
 # Begin Source File
 
+SOURCE=.\GameOverDlgProc.c
+# End Source File
+# Begin Source File
+
 SOURCE=.\GameWndProc.c
 # End Source File
 # Begin Source File
@@ -129,6 +133,10 @@ SOURCE=.\cu_map.h
 # Begin Source File
 
 SOURCE=.\DealBeginMenuMsg.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\GameOverDlgProc.h
 # End Source File
 # Begin Source File
 
@@ -177,7 +185,15 @@ SOURCE=.\sounds\eating.wav
 # End Source File
 # Begin Source File
 
+SOURCE=.\sounds\gameover.wav
+# End Source File
+# Begin Source File
+
 SOURCE=.\sounds\go.wav
+# End Source File
+# Begin Source File
+
+SOURCE=.\sounds\next.wav
 # End Source File
 # Begin Source File
 

@@ -13,7 +13,7 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// Chinese (中国) resources
+// Chinese (P.R.C.) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
 #ifdef _WIN32
@@ -65,6 +65,8 @@ IDR_GAME_START          WAVE    DISCARDABLE     "sounds\\start.wav"
 IDR_EATING              WAVE    DISCARDABLE     "sounds\\eating.wav"
 IDR_READY               WAVE    DISCARDABLE     "sounds\\ready.wav"
 IDR_GO                  WAVE    DISCARDABLE     "sounds\\go.wav"
+IDR_NEXT                WAVE    DISCARDABLE     "sounds\\next.wav"
+IDR_GAME_OVER           WAVE    DISCARDABLE     "sounds\\gameover.wav"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -77,6 +79,17 @@ FONT 12, "黑体"
 BEGIN
     LTEXT           "帮助",IDC_STATIC,20,15,40,10
     DEFPUSHBUTTON   "确定",IDC_BTN_OK,95,100,35,15,BS_CENTER
+END
+
+IDD_GAMEOVER_DLG DIALOG DISCARDABLE  0, 0, 187, 97
+STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP
+FONT 10, "System"
+BEGIN
+    PUSHBUTTON      "再来一局",IDC_GAME_AGAIN,19,70,37,14,BS_CENTER | 
+                    BS_VCENTER
+    PUSHBUTTON      "回主界面",IDC_RETURN_MAIN,74,70,37,14,BS_CENTER
+    PUSHBUTTON      "退出游戏",IDC_EXIT_GAME,130,70,37,14,BS_CENTER | 
+                    BS_VCENTER
 END
 
 
@@ -95,10 +108,64 @@ BEGIN
         TOPMARGIN, 7
         BOTTOMMARGIN, 120
     END
+
+    IDD_GAMEOVER_DLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 180
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 90
+    END
 END
 #endif    // APSTUDIO_INVOKED
 
-#endif    // Chinese (中国) resources
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "080404b0"
+        BEGIN
+            VALUE "Comments", "经典小游戏 - 贪吃蛇\0"
+            VALUE "CompanyName", "wid\0"
+            VALUE "FileDescription", "贪吃蛇 - 经典怀旧\0"
+            VALUE "FileVersion", "1, 0, 0, 1\0"
+            VALUE "InternalName", "Snake - 贪吃蛇\0"
+            VALUE "LegalCopyright", "Copyright 2013, wid\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename", "Snake.exe\0"
+            VALUE "PrivateBuild", "\0"
+            VALUE "ProductName", "null Snake\0"
+            VALUE "ProductVersion", "1, 0, 0, 1\0"
+            VALUE "SpecialBuild", "\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x804, 1200
+    END
+END
+
+#endif    // !_MAC
+
+#endif    // Chinese (P.R.C.) resources
 /////////////////////////////////////////////////////////////////////////////
 
 

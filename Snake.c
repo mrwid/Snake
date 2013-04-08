@@ -10,6 +10,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR szCmdLine
 	static TCHAR szGameName[] = TEXT( "Snake" );
 
 	HWND		hwnd;
+	RECT		rect;
 	MSG			msg;
 	WNDCLASS	wndclass;
 
@@ -30,12 +31,17 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR szCmdLine
 		return 0;
 	}
 
+	rect.left = 0;	rect.top = 0;
+	rect.right  = 800 + GetSystemMetrics(SM_CXFRAME);
+	rect.bottom = 600 + GetSystemMetrics(SM_CYCAPTION) + GetSystemMetrics(SM_CXFRAME);
+	AdjustWindowRect( &rect, WS_CAPTION, FALSE );
+
 	hwnd = CreateWindow(
 		szGameName, TEXT("Ã∞≥‘…ﬂ"),
 		WS_CAPTION | WS_SYSMENU,
-		(int)((GetSystemMetrics(SM_CXSCREEN)-800)/2),
-		(int)((GetSystemMetrics(SM_CYSCREEN)-600)/2),
-		800, 600,
+		(int)((GetSystemMetrics(SM_CXSCREEN)-rect.right) /2),
+		(int)((GetSystemMetrics(SM_CYSCREEN)-rect.bottom)/2),
+		rect.right, rect.bottom,
 		NULL, NULL, hInstance, NULL
 	);
 

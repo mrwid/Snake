@@ -9,15 +9,14 @@ LRESULT DealBeginMenuMsg( HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam 
 	static int menuID = 0;
 	static int oldMenuID = 0;
 
-	HDC hdc;
+	HDC			hdc;
 	PAINTSTRUCT ps;
 
 	switch( message )
 	{
 	case WM_CREATE:
-		hInst = ((LPCREATESTRUCT)lParam)->hInstance;
-		PlaySound( MAKEINTRESOURCE( IDR_GAME_START ), hInst, SND_RESOURCE | SND_ASYNC | SND_LOOP );
-		SetTimer( hwnd, TMR_BEGIN, 60, NULL );
+		hInst =(HINSTANCE) GetWindowLong( hwnd, GWL_HINSTANCE );
+		PostMessage( hwnd, CM_GAME_READY, 0, 0 );
 		return 0;
 
 	case WM_PAINT:
@@ -26,8 +25,14 @@ LRESULT DealBeginMenuMsg( HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam 
 		EndPaint( hwnd, &ps );
 		return 0;
 
+	case CM_GAME_READY:
+		SetTimer( hwnd, TMR_BEGIN, 60, NULL );
+		PlaySound( MAKEINTRESOURCE( IDR_GAME_START ), (HINSTANCE)GetWindowLong( hwnd, GWL_HINSTANCE ), SND_RESOURCE | SND_ASYNC | SND_LOOP );
+		return 0;
+
 	case CM_START_GAME:
 		InvalidateRect( hwnd, NULL, TRUE );
+		SetWindowLong( hwnd, GWL_WNDPROC, (long)PlayingProc );
 		SetTimer( hwnd, TMR_PLAYING_READY, 500, NULL );			//开启游戏准备音效定时器
 		PlaySound( NULL, NULL, SND_FILENAME );					//终止当前音效
 		return CM_START_GAME;

@@ -12,10 +12,14 @@
 
 //////////////////////////////////////////////////////////////////////////
 
-void InitPlayingMap( HWND, HDC, HINSTANCE );
+void InitPlayingMap( HWND, HDC, POINT, CMAP *, int );
 
 //////////////////////////////////////////////////////////////////////////
 
-void DrawBrickWall( HWND, HDC );			//画四周砖块
+void DrawBrickWall( HWND, HDC );				//绘制四周砖块
 
-void DrawRandWall( HWND, HDC, CMAP*, int );		//随机墙壁
+void DrawRandWall( HWND, HDC, CMAP*, int );		//绘制随机障碍物
+
+void DrawRandomFood( HDC, POINT );				//绘制食物
+
+

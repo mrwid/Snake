@@ -2,9 +2,22 @@
 #include <stdio.h>
 //////////////////////////////////////////////////////////////////////////
 
-void InitPlayingMap( HWND hwnd, HDC hdc, HINSTANCE hInst )
+void InitPlayingMap( HWND hwnd, HDC hdc, POINT ptFood, CMAP *gm_map, int level )
 {
+	HPEN hPen;
+	HBRUSH hBrush;
+
+	hPen = CreatePen( PS_SOLID, 3, RGB(128, 128, 128) );
+	hBrush = CreateSolidBrush( RGB(192, 192, 192) );
+	SelectObject( hdc, hPen );
+	SelectObject( hdc, hBrush );
+	
 	DrawBrickWall( hwnd, hdc );
+	DrawRandWall( hwnd, hdc, gm_map, level );
+	DrawRandomFood( hdc, ptFood );
+
+	DeleteObject( hPen );
+	DeleteObject( hBrush );
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -62,15 +75,13 @@ void DrawRandWall( HWND hwnd, HDC hdc, CMAP *gm_map, int lev )
 	}
 }
 
+//////////////////////////////////////////////////////////////////////////
+
+//绘制随机障碍物
 void drawWallLine( HDC hdc, int x1, int y1, int x2, int y2 )
 {
 	int i = 0;
 	int xPos = 0, yPos = 0;
-
-	FILE *fp;
-	fp = fopen( "D:\\a.txt", "a" );
-	fprintf( fp, "%d %d %d %d\n", x1, y1, x2, y2 );
-	fclose( fp );
 
 	if( x2-x1 == 0 )
 	{
@@ -91,5 +102,25 @@ void drawWallLine( HDC hdc, int x1, int y1, int x2, int y2 )
 			xPos += 10;
 		}
 	}
-
 }
+
+//////////////////////////////////////////////////////////////////////////
+
+//绘制食物
+void DrawRandomFood( HDC hdc, POINT ptFood )
+{
+	HPEN hPen;
+	HBRUSH hBrush;
+
+	hPen = GetStockObject( WHITE_PEN );
+	hBrush = CreateSolidBrush( RGB(255, 0, 0) );
+	SelectObject( hdc, hPen );
+	SelectObject( hdc, hBrush );
+
+	Ellipse( hdc, ptFood.x, ptFood.y, ptFood.x+10, ptFood.y+10 );
+
+	DeleteObject( hPen );
+	DeleteObject( hBrush );
+}
+
+//////////////////////////////////////////////////////////////////////////
